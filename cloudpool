@@ -1,0 +1,41 @@
+#!/bin/bash
+
+CONFIG_FILE="/opt/cloudpool/config.conf"
+COMMAND="$1"
+SECOND_COMMAND="$2"
+
+case "$COMMAND" in
+    start)
+        echo "Starting...."
+        python3 /opt/cloudpool/main.py
+        ;;
+    config)
+        rclone --config rclone-nodes.conf config
+        ;;
+    change-dir)
+        if [[ -z "$SECOND_COMMAND" ]]; then
+            echo "Error: No directory specified"
+            exit 1
+        fi
+        
+        if [[ ! -f "$CONFIG_FILE" ]]; then
+            echo "Error: Config file not found"
+            exit 1
+        fi
+        
+        sed -i "s|^user_folder=.*|user_folder=$SECOND_COMMAND|" "$CONFIG_FILE"
+        echo "Directory changed to: $SECOND_COMMAND"
+        ;;
+    help)
+        echo "Welcome to Cloud Pool!"
+        echo ""
+        echo "cloudpool -"
+        echo "          |- start          Start the program"
+        echo "          |- config         Enter Rclone setup to add or remove nodes"
+        echo "          |- change-dir     Change the folder of files"
+        ;;
+    *)
+        echo "Unknown command. Write 'cloudpool help' to see a guide."
+        exit 1
+        ;;
+esac
