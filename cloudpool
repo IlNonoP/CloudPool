@@ -32,7 +32,8 @@ case "$COMMAND" in
         echo "cloudpool -"
         echo "          |- start          Start the program"
         echo "          |- config         Enter Rclone setup to add or remove nodes"
-        echo "          |- change-dir     Change the folder of files"
+        echo "          |- change-dir     Change the folder where you will place and see your uploaded files"
+        echo ""
         ;;
     *)
         echo "Unknown command. Write 'cloudpool help' to see a guide."
