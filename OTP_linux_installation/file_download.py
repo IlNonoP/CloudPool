@@ -2,12 +2,6 @@ import sys
 import file_translation
 
 
-
-
-
-
-
-
 if __name__ == "__main__":
     parameters = sys.argv[1:]
     user_folder = str(parameters[1])
